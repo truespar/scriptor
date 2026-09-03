@@ -18,5 +18,5 @@ scriptor-compare = { path = "../scriptor-compare" }
 scriptor-wasm = { path = "../scriptor-wasm" }
 anyhow = "1"
 clap = { version = "4", features = ["derive"] }
-quick-xml = "0.41"
+quick-xml = "0.42"
 image = { version = "0.25", default-features = false, features = ["png"] }

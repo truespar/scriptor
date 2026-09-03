@@ -13,4 +13,4 @@ anyhow = "1"
 # lzma, xz) we never touch - dead weight, and a wall for the wasm32 target. Trim to a pure-Rust
 # deflate backend (flate2/miniz_oxide): minimal, deterministic, wasm-safe.
 zip = { version = "8", default-features = false, features = ["deflate-flate2-zlib-rs"] }
-quick-xml = "0.41"
+quick-xml = "0.42"
