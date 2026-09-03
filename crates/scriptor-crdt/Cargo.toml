@@ -11,5 +11,5 @@ publish = false
 scriptor-ooxml = { path = "../scriptor-ooxml" }
 anyhow = "1"
 loro = "1"
-quick-xml = "0.41"
+quick-xml = "0.42"
 serde_json = "1"
