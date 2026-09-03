@@ -1,0 +1,12 @@
+{
+  "id": "lo-ooxmlexport",
+  "source": "https://git.libreoffice.org/core",
+  "path": "sw/qa/extras/ooxmlexport/data",
+  "revision": "337ed97",
+  "revisionDate": "2026-06-26",
+  "license": "MPL-2.0 / bug-tracker attachments (test inputs only; not redistributable)",
+  "docxCount": 1347,
+  "capturedOn": "2026-07-27",
+  "schemaInvalidByInput": "17 documents are recorded invalid in validation.json because their INPUTS are invalid, and every error in our output also appears in the input. 13 carry w:charSpace as an unsigned 32-bit value and tdf76683_negativeTwipsMeasure.docx carries w:w=-1 / w:space=-1 on a column; those 14 previously recorded valid only because the exporter dropped w:docGrid and w:cols. tdf111964.docx and tdf153255.docx joined when run-level passthrough widened: the first reproduces its input's error exactly, the second reproduces 3 of its input's 7. tdf127085.docx joined when picture detection stopped mistaking a shape background fill for a picture, so its mc:Fallback VML is captured verbatim and its undeclared ID attribute comes back with it. Scriptor does not repair OOXML it was not asked to touch. See README.md.",
+  "notes": "Baseline of scriptor roundtrip + resave + remodel/schema over the corpus. See README.md. 4 docs are encrypted CFB (roundtrip and resave 'error'); tdf171025/tdf171038_pageAfter are .odt mis-named .docx (remodel fails, absent from validation.json) - the same 6 documents account for every 'error' status in roundtrip.json and resave.json. resave is 1339 lossless / 2 lossy / 6 error: no part the model does not own is dropped or rewritten, and the 2 lose visible text from document.xml. Down from 35 lossy - nested tables and text boxes are now preserved verbatim rather than dropped. See README.md."
+}

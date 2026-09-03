@@ -1,0 +1,57 @@
+{
+  "name": "@truespar/scriptor-react",
+  "version": "0.1.0",
+  "description": "React component for the Scriptor document editor.",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truespar/scriptor.git",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/truespar/scriptor#readme",
+  "bugs": {
+    "url": "https://github.com/truespar/scriptor/issues"
+  },
+  "type": "module",
+  "main": "./src/index.tsx",
+  "module": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./src/index.tsx",
+      "import": "./src/index.tsx"
+    }
+  },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@truespar/scriptor-core": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.17",
+    "react": "^19.2.8",
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  }
+}

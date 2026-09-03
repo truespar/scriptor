@@ -1,0 +1,10 @@
+# Normalize line endings to LF across platforms (silences core.autocrlf warnings).
+* text=auto eol=lf
+
+# Binary assets - never normalize or text-diff (notably .docx test fixtures).
+*.docx binary
+*.pdf  binary
+*.png  binary
+*.jpg  binary
+*.ico  binary
+*.woff2 binary

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <AssemblyName>ooxml-validate</AssemblyName>
+    <RootNamespace>OoxmlValidate</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- MIT-licensed (Microsoft). The reference OOXML schema validator - the gate the Rust side
+         cannot provide itself. Dev tool only: never a runtime dependency of Scriptor. -->
+    <PackageReference Include="DocumentFormat.OpenXml" Version="3.*" />
+  </ItemGroup>
+
+</Project>

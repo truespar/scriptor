@@ -1,0 +1,43 @@
+[package]
+name = "scriptor-wasm"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+# WASM bindings for the canvas editor. Thin glue: it marshals bytes between the browser TS shell and
+# the shared Rust core (scriptor-ooxml -> scriptor-crdt -> scriptor-edit / scriptor-layout). Edit
+# semantics live in scriptor-edit, never here. cdylib for the wasm artifact; rlib so it still builds
+# as a normal workspace member on native.
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+# wasm-pack's bundled wasm-opt (binaryen) crashes optimizing this module since the `image` decoders
+# were added (UNREACHABLE in Precompute.cpp). Skip the wasm-opt pass until wasm-pack ships a binaryen
+# with the fix - the module is correct, just unminified (a bit larger). The dev build never runs it.
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = false
+
+[dependencies]
+scriptor-ooxml = { path = "../scriptor-ooxml" }
+scriptor-crdt = { path = "../scriptor-crdt" }
+scriptor-edit = { path = "../scriptor-edit" }
+scriptor-compare = { path = "../scriptor-compare" }
+scriptor-layout = { path = "../scriptor-layout" }
+scriptor-fonts = { path = "../scriptor-fonts" }
+anyhow = "1"
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+console_error_panic_hook = "0.1"
+
+[dependencies.web-sys]
+version = "0.3"
+features = ["console"]
+
+# loro generates a random peer id at runtime via getrandom 0.2 (through rand 0.8). On
+# wasm32-unknown-unknown getrandom needs its `js` backend (crypto.getRandomValues) or it errors at
+# runtime. Enable it for the wasm target so CollabDoc::new() works in the browser.
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["js"] }

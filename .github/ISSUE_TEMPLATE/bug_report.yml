@@ -1,0 +1,66 @@
+name: Bug report
+description: A document renders or round-trips incorrectly, or Scriptor behaves differently than documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        A document that renders wrong is the most useful report there is, and it
+        needs no code. Two screenshots are usually enough.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: >
+        Include the actual output or error, not a paraphrase. For a rendering
+        bug, a screenshot of Scriptor next to the same page in Word says more
+        than a description.
+    validations: {required: true}
+  - type: textarea
+    id: expected
+    attributes:
+      label: What Word does instead
+      description: >
+        Word is the reference. Say which version, since its layout has changed
+        between releases.
+    validations: {required: true}
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open the document in the playground
+        2. ...
+    validations: {required: true}
+  - type: input
+    id: file
+    attributes:
+      label: The document that triggers it
+      description: >
+        You do not need to attach it. Most Word documents are confidential, and
+        a hand-built minimal file that shows the same problem is better anyway.
+        If you cannot share either, say what produced the document - the Word
+        version, or the system that generated it - since that is often enough to
+        identify the quirk.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations: {required: true}
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where you hit it
+      options:
+        - Browser editor (canvas)
+        - Headless / scriptor-client
+        - CLI (scriptor)
+        - Collaboration relay (scriptor-server)
+        - A framework wrapper (React / Vue / Svelte / web component)
+    validations: {required: true}
+  - type: input
+    id: platform
+    attributes:
+      label: Browser or operating system
+      placeholder: Chrome 140 on Windows 11
+    validations: {required: true}

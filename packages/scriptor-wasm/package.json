@@ -1,0 +1,35 @@
+{
+  "name": "@truespar/scriptor-wasm",
+  "version": "0.1.0",
+  "description": "The Scriptor document engine (Rust crate scriptor-wasm) compiled to WebAssembly with typed bindings. The other packages build on this; apps never import it directly.",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truespar/scriptor.git",
+    "directory": "packages/scriptor-wasm"
+  },
+  "homepage": "https://github.com/truespar/scriptor#readme",
+  "bugs": {
+    "url": "https://github.com/truespar/scriptor/issues"
+  },
+  "type": "module",
+  "main": "./dist/scriptor_wasm.js",
+  "module": "./dist/scriptor_wasm.js",
+  "types": "./dist/scriptor_wasm.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/scriptor_wasm.d.ts",
+      "import": "./dist/scriptor_wasm.js"
+    },
+    "./scriptor_wasm_bg.wasm": "./dist/scriptor_wasm_bg.wasm"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "wasm-pack build ../../crates/scriptor-wasm --target web --release --out-dir ../../packages/scriptor-wasm/dist",
+    "build:dev": "wasm-pack build ../../crates/scriptor-wasm --target web --dev --out-dir ../../packages/scriptor-wasm/dist",
+    "clean": "rm -rf dist"
+  }
+}

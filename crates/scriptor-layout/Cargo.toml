@@ -1,0 +1,35 @@
+[package]
+name = "scriptor-layout"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+# The canvas layout engine: shaping (cosmic-text/rustybuzz/swash) + scriptor-fonts policy ->
+# line-break -> pagination -> a resumable block engine emitting paint commands. Compiles to WASM
+# (browser canvas) and native (server-side headless render + agent). This crate starts at the
+# foundation: prove cosmic-text shapes + lays out a line in our toolchain and yields glyph
+# positions; pagination / tables / floats build on top.
+
+[dependencies]
+scriptor-fonts = { path = "../scriptor-fonts" }
+
+# Image decode (PNG/JPEG) for inline + header/footer images, composited into the page. Pure-Rust
+# decoders, so this cross-compiles to wasm32; only the formats we need to keep the wasm lean.
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "bmp", "tiff"] }
+
+# Vector rasterizer for the WMF/EMF metafile interpreter (GDI records -> anti-aliased paths). SIMD
+# off for clean wasm32 portability; the scalar path is plenty for occasional metafile decodes.
+tiny-skia = { version = "0.12", default-features = false, features = ["std"] }
+
+# Native: full cosmic-text - system font enumeration for tests + server-side headless render.
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+cosmic-text = "0.19"
+
+# wasm32 (browser): cosmic-text's `std` feature pulls `fontdb/memmap` + `sys-locale`, which do not
+# build for wasm32-unknown-unknown. Drop to `no_std` + `swash` (pure-Rust + libm) and supply fonts
+# ourselves via scriptor-fonts - which is the plan regardless (we own the font subsystem).
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+cosmic-text = { version = "0.19", default-features = false, features = ["no_std", "swash"] }

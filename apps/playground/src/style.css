@@ -1,0 +1,133 @@
+:root {
+  --ink: #2a2f3a;
+  --muted: #6b7488;
+  --line: #e2e6ee;
+  --bg: #f1f3f8;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+}
+
+/* Full-viewport column: slim title bar + the Workspace frame fills the rest. */
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+#frame {
+  flex: 1;
+  min-height: 0;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  /* Narrow viewport: whole groups (tools, status) drop to their own row instead of
+     overflowing or breaking mid-item. */
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  padding: 0.6rem 1rem;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  flex: 0 0 auto;
+}
+.bar > strong {
+  white-space: nowrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: var(--muted);
+  background: #eef1f6;
+  padding: 2px 8px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex: none;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 0.5rem;
+  flex: none;
+}
+
+.btn {
+  font: inherit;
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn:hover {
+  background: #f3f5f9;
+}
+.btn.fmt {
+  min-width: 30px;
+  text-align: center;
+}
+.btn.on {
+  background: #dbe7ff;
+  border-color: #9cc0ff;
+}
+.size {
+  width: 52px;
+  font: inherit;
+  padding: 3px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.sep {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+  margin: 2px 4px;
+}
+
+.status {
+  margin-left: auto;
+  font-size: 0.8rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #eef1f6;
+  color: var(--muted);
+  /* Shrink to fit whatever row it lands on: single line, ellipsized, never forcing
+     the bar wider (flex min-width:auto would otherwise refuse to shrink the text). */
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.stage {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem 4rem;
+}
+
+/* The component creates a .scriptor-sheet (the full-document wrapper) with per-page frames + their
+   own drop shadows inside. The host must NOT add a shadow on .scriptor-sheet: that element spans the
+   whole page stack, so a box-shadow on it fans out down the entire left/right edge and reads as one
+   continuous vertical rail through every inter-page gap (the reported "line between the pages"). Page
+   definition is the component's concern now - the host just supplies the desk background. */
+
+.hint {
+  max-width: 44rem;
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-align: center;
+}

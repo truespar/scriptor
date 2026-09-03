@@ -1,0 +1,19 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "//": "envMode loose: the wasm build shells out to the host MSVC linker, which needs the full vcvars toolchain env (LIB/INCLUDE/LIBPATH/WindowsSdkDir/...); strict mode (turbo default) strips those and the build-script link fails with LNK1104 msvcrt.lib. globalDependencies: the wasm build runs wasm-pack over the Rust crates, which live OUTSIDE any TS package - without listing them turbo hashes only packages/scriptor-wasm/** and 'cache hits' forever, restoring a stale dist over freshly-built wasm. Listing the crate sources busts the build (and everything downstream) on any Rust change. vitest.config.ts is listed for the same reason: it lives at the repo root, so it belongs to no package's default input set, and without it editing the config (adding a project, changing an include glob, switching the browser provider) leaves every test hash unchanged and `pnpm test` replays a stale pass without running vitest at all.",
+  "envMode": "loose",
+  "globalDependencies": [
+    "crates/**",
+    "Cargo.toml",
+    "Cargo.lock",
+    "rust-toolchain.toml",
+    "vitest.config.ts"
+  ],
+  "tasks": {
+    "build": { "dependsOn": ["^build"], "outputs": ["dist/**"] },
+    "dev": { "cache": false, "persistent": true },
+    "test": { "dependsOn": ["build"] },
+    "typecheck": { "dependsOn": ["^build"] },
+    "clean": { "cache": false }
+  }
+}

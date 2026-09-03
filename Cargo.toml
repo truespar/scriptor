@@ -1,0 +1,14 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+
+[workspace.package]
+edition = "2024"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/truespar/scriptor"
+authors = ["The Intelligence Company AB (publ)"]
+rust-version = "1.89"
+
+# Keep dependencies current: run `cargo upgrade --dry-run` before editing manifests, and
+# never pin to an old major out of habit.
+[workspace.dependencies]

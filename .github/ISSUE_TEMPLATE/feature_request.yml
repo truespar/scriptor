@@ -1,0 +1,24 @@
+name: Feature request
+description: An OOXML feature or capability Scriptor does not handle yet
+labels: [enhancement]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What you would like Scriptor to do
+    validations: {required: true}
+  - type: textarea
+    id: why
+    attributes:
+      label: What you are trying to accomplish
+      description: >
+        The underlying goal, not just the proposed feature - there may be a way
+        to do it already, or a better shape for the API.
+    validations: {required: true}
+  - type: input
+    id: spec
+    attributes:
+      label: The part of the OOXML spec it involves, if you know
+      description: >
+        An ECMA-376 section number or the `w:` element name is far more useful
+        than a link to how another editor did it.

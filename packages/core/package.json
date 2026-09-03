@@ -1,0 +1,52 @@
+{
+  "name": "@truespar/scriptor-core",
+  "version": "0.1.0",
+  "description": "Framework-agnostic Scriptor document engine: a headless canvas view (render + caret + selection + editing) over the Rust/WASM core. Read-only or edit mode; configurable. Framework wrappers build on this.",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/truespar/scriptor.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/truespar/scriptor#readme",
+  "bugs": {
+    "url": "https://github.com/truespar/scriptor/issues"
+  },
+  "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "publishConfig": {
+    "main": "./dist/index.js",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --root ../..",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@truespar/scriptor-wasm": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.1",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,42 @@
+# Rust
+/target
+**/target
+
+# wasm-pack output (generated from scriptor-wasm; rebuilt via `wasm-pack build`)
+**/pkg/
+
+# Node / TypeScript
+node_modules/
+dist/
+.turbo/
+*.tsbuildinfo
+
+# .NET build output (tools/ooxml-validate)
+tools/**/bin/
+tools/**/obj/
+
+# Secrets - never commit local environment files
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+.idea/
+.vs/
+.vscode/*
+!.vscode/extensions.json
+
+# Merge / patch leftovers
+*.orig
+*.rej
+*.bak
+*.tmp
+*~
+
+# Vitest browser-mode failure screenshots
+**/__screenshots__/
+.vitest-attachments/

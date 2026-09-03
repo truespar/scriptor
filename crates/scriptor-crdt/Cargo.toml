@@ -1,0 +1,15 @@
+[package]
+name = "scriptor-crdt"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+scriptor-ooxml = { path = "../scriptor-ooxml" }
+anyhow = "1"
+loro = "1"
+quick-xml = "0.41"
+serde_json = "1"

@@ -1,0 +1,16 @@
+[package]
+name = "scriptor-ooxml"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+anyhow = "1"
+# .docx (OPC) only uses Stored + Deflate. zip 8's default pulls C-backed codecs (bzip2-sys, zstd,
+# lzma, xz) we never touch - dead weight, and a wall for the wasm32 target. Trim to a pure-Rust
+# deflate backend (flate2/miniz_oxide): minimal, deterministic, wasm-safe.
+zip = { version = "8", default-features = false, features = ["deflate-flate2-zlib-rs"] }
+quick-xml = "0.41"

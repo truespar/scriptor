@@ -1,0 +1,44 @@
+Liberation Sans Narrow - license
+=================================
+
+This directory bundles the Liberation Sans Narrow font faces
+(LiberationSansNarrow-{Regular,Bold,Italic,BoldItalic}.ttf) as the
+metric-compatible substitute for Microsoft "Arial Narrow".
+
+License statement embedded in the font files (name table, verbatim):
+
+    Copyright 2010 Oracle and/or its affiliates.
+    Version 1.07.5
+    Licensed under the Liberation Fonts license, see
+    https://fedoraproject.org/wiki/Licensing/LiberationFontLicense
+
+The "Liberation Fonts license" is the GNU General Public License,
+version 2, WITH a font-embedding exception. (Note: this differs from the
+other clones in this directory - Carlito/Caladea/Gelasio/Arimo are SIL
+OFL 1.1 and Tinos/Cousine are Apache-2.0. The Liberation Sans Narrow
+faces were NOT relicensed to the OFL when the rest of the Liberation
+family moved to OFL 1.1 at v2.0; the Narrow faces remain GPLv2 + the
+font-embedding exception, so they are documented + licensed separately
+here.)
+
+The operative font-embedding exception (the reason this font is safe to
+ship in, and render documents with, a non-GPL application) reads, in
+substance:
+
+    "As a special exception, if you create a document which uses this
+    font, and embed this font or unaltered portions of this font into
+    the document, this font does not by itself cause the resulting
+    document to be covered by the GNU General Public License. This
+    exception does not however invalidate any other reasons why the
+    document might be covered by the GNU General Public License. If you
+    modify this font, you may extend this exception to your version of
+    the font, but you are not obligated to do so. If you do not wish to
+    do so, delete this exception statement from your version."
+
+The full, binding license is the GNU GPL v2 plus the exception quoted
+above. The complete GPLv2 text accompanies this distribution in
+`GPL-2.0.txt`, in the same directory as this file. The font files are
+bundled UNMODIFIED.
+
+Scriptor uses these faces only to shape/rasterize and (optionally) embed
+fonts in documents - exactly the use the embedding exception permits.

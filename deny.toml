@@ -1,0 +1,72 @@
+# cargo-deny: policy. What licences may enter the dependency graph, whether
+# advisories are outstanding, and where crates may come from.
+#
+# THIRD-PARTY-NOTICES.md is the other half of this - the attribution text those
+# licences require. Policy here, artefact there.
+#
+#   cargo deny check
+
+[graph]
+# The targets we ship for. wasm32 is not optional here: the browser editor is
+# the primary artifact, and a crate that only builds natively would otherwise
+# pass a policy check it never has to satisfy.
+targets = [
+    "x86_64-unknown-linux-gnu",
+    "aarch64-unknown-linux-gnu",
+    "x86_64-pc-windows-msvc",
+    "aarch64-apple-darwin",
+    "wasm32-unknown-unknown",
+]
+
+[advisories]
+version = 2
+yanked = "warn"
+# Each entry is a decision, not a mute button. Re-check on dependency bumps.
+ignore = []
+
+[licenses]
+version = 2
+confidence-threshold = 0.9
+# Exactly the licences present today. Anything new fails the build and gets a
+# deliberate decision rather than sliding in unnoticed - which is the point of
+# having this file at all.
+#
+# Scriptor's own source is MIT OR Apache-2.0; this list is what the dependency
+# graph is permitted to add on top of that.
+allow = [
+    "MIT",
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "BSL-1.0",
+    "Zlib",
+    "0BSD",
+    "Unlicense",
+    "Unicode-3.0",
+]
+
+# MPL-2.0 is file-level copyleft, not linking copyleft: using these crates
+# unmodified imposes nothing on Scriptor or on anyone embedding it. They arrive
+# through loro (the CRDT) and are allowed by name rather than by adding MPL-2.0
+# to the list above, so a *new* MPL crate still has to be argued for.
+[[licenses.exceptions]]
+name = "im"
+allow = ["MPL-2.0"]
+
+[[licenses.exceptions]]
+name = "sized-chunks"
+allow = ["MPL-2.0"]
+
+[[licenses.exceptions]]
+name = "bitmaps"
+allow = ["MPL-2.0"]
+
+[bans]
+multiple-versions = "warn"
+wildcards = "allow"
+
+[sources]
+unknown-registry = "deny"
+unknown-git = "deny"
+allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []

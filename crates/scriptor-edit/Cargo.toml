@@ -1,0 +1,17 @@
+[package]
+name = "scriptor-edit"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+# The one edit path. Typed, attributed operations over a scriptor-crdt CollabDoc. The canvas editor
+# (via WASM) and the headless agent (scriptor-client) both construct EditOps and call apply() - same
+# semantics, same attribution, one loro op log. Edit semantics live HERE (Rust), never in the TS
+# shell, which is what keeps agents first-class participants rather than a bolted-on path.
+
+[dependencies]
+scriptor-crdt = { path = "../scriptor-crdt" }
+anyhow = "1"
