@@ -39,7 +39,7 @@ describe('sanitizeBookmarkName', () => {
     expect(sanitizeBookmarkName('_intro')).toBe('B_intro');
   });
 
-  it('truncates to Word's 40-character limit', () => {
+  it("truncates to Word's 40-character limit", () => {
     expect(sanitizeBookmarkName('a'.repeat(60))).toHaveLength(40);
   });
 

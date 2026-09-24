@@ -86,6 +86,17 @@ export const ScriptorDoc = defineComponent({
       () => props.mode,
       (m) => view?.setMode(m),
     );
+    // The gutter is a prop, so it has to keep behaving like one. It was passed at
+    // create and never again, which made it look reactive and act like a constructor
+    // argument: a host tracking the OS theme set a light desk once and kept it
+    // through every switch to dark, with no way to say otherwise short of remounting
+    // the editor and losing the scroll position with it.
+    watch(
+      () => props.gutter,
+      (g) => {
+        if (g) view?.setGutter(g);
+      },
+    );
     watch(
       () => props.docx,
       (d) => {
@@ -112,6 +123,10 @@ export const ScriptorDoc = defineComponent({
       toDocumentXml: () => view?.toDocumentXml() ?? '',
       /** Set the zoom factor (1 = 100%); the core clamps to 25%..400%. */
       setZoom: (factor: number) => view?.setZoom(factor),
+      /** The color painted between and around the page sheets. `'transparent'` leaves
+       *  the gaps clear so the host's own backdrop shows through, which is the easier
+       *  way to stay themed: the desk is then CSS, and follows the page. */
+      setGutter: (color: string) => view?.setGutter(color),
       /** The live zoom factor, whoever last changed it. */
       getZoom: () => view?.zoomLevel ?? 1,
       /** Pages in the current layout (0 before the first render). */
